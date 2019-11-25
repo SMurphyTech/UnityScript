@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player_Move : MonoBehaviour
 {
+    public bool mobile = true;
     public float moveSpeed = .3f;
     public float moveX, moveY;
     private bool m_FacingRight = true;
@@ -17,22 +18,25 @@ public class Player_Move : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        moveX = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        moveY = Input.GetAxisRaw("Vertical") * moveSpeed;
-
-        transform.Translate(moveX, moveY, 0);
-
-        if (moveX > 0f && !m_FacingRight)
+        if (mobile == true)
         {
-            // ... flip the player.
-            Debug.Log("flip");
-            Flip();
-        }
-        // Otherwise if the input is moving the player left and the player is facing right...
-        else if (moveX < 0f && m_FacingRight)
-        {
-            // ... flip the player.
-            Flip();
+            moveX = Input.GetAxisRaw("Horizontal") * moveSpeed;
+            moveY = Input.GetAxisRaw("Vertical") * moveSpeed;
+
+            transform.Translate(moveX, moveY, 0);
+
+            if (moveX > 0f && !m_FacingRight)
+            {
+                // ... flip the player.
+                
+                Flip();
+            }
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (moveX < 0f && m_FacingRight)
+            {
+                // ... flip the player.
+                Flip();
+            }
         }
     }
 
